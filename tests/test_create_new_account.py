@@ -26,4 +26,17 @@ def test_create_account_with_old_account(create_account, create_new_account, sta
         'If you are sure that it is your email address, click here to get your password and access your account.'
     )
 
-# def test_create_account_with_incorrect_email(create_account):
+
+@allure.feature('Test ui')
+@allure.story('Test create account with empty all fields')
+@allure.title('Test create account with empty all fields')
+@allure.severity(allure.severity_level.NORMAL)
+def test_create_account_with_empty_all_fields(create_account, start_end):
+    required_field = 'This is a required field.'
+    create_account.open_page()
+    create_account.click_button_create_account()
+    create_account.check_error_message('first_name', required_field)
+    create_account.check_error_message('last_name', required_field)
+    create_account.check_error_message('email', required_field)
+    create_account.check_error_message('password', required_field)
+    create_account.check_error_message('confirm_password', required_field)
