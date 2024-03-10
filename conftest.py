@@ -3,6 +3,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from pages.create_account import CreateAccount
+from pages.eco_friendly import EcoFriendly
 
 
 @pytest.fixture(scope='session')
@@ -35,3 +36,8 @@ def create_new_account(create_account):
     create_account.open_page()
     data = create_account.fill_all_form()
     return data
+
+
+@pytest.fixture()
+def eco_friendly(driver):
+    return EcoFriendly(driver)
