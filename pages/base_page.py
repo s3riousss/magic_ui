@@ -5,6 +5,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from utils.project_ec import text_is_not_empty_in_element
 from pages.locators import create_account_locators as loc
+from selenium.webdriver.common.by import By
+from pages.locators import eco_friendly_locators as loc
 
 
 class BasePage:
@@ -23,8 +25,9 @@ class BasePage:
         print(f'Expected result= {exp_result}\n')
         assert act_result == exp_result, f'\n{message}\n' \
                                          f'Actual_result = {act_result}\n' \
-                                         f'Expected_result = {exp_result}\n'
-        print(f'Done checking: {name_function}')
+                                         f'Expected_result = {exp_result}\n' \
+                                         f'Done checking: {name_function}\n'
+        print(f'Done checking: {name_function}\n')
 
     def wait_element_presence(self, timeout, locator):
         return WebDriverWait(self.driver, timeout).until(ec.presence_of_element_located(locator))
@@ -38,6 +41,8 @@ class BasePage:
             self.driver.delete_all_cookies()
         if self.page_url:
             self.driver.get(f'{self.base_url}{self.page_url}')
+            WebDriverWait(self.driver, 5).until(text_is_not_empty_in_element(loc.welcome))
+
         else:
             raise NotImplementedError('Page can not be opened for this page class')
 
@@ -49,7 +54,8 @@ class BasePage:
 
     @allure.step('Checking successful message after create new account')
     def check_alert_text(self, text):
-        self.wait_element_text(5, loc.alert)
+        WebDriverWait(self.driver, 5).until(text_is_not_empty_in_element(loc.welcome))
+        self.wait_element_text(10, loc.alert)
         alert = self.find(loc.alert)
         assert alert.text == text, self.assert_check(alert.text, text, 'Error check alert text')
 

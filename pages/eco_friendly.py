@@ -1,9 +1,6 @@
-import time
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
-
+from utils.project_ec import text_is_not_empty_in_element
 from pages.base_page import BasePage
 from pages.locators import eco_friendly_locators as loc
 from selenium.webdriver.support.select import Select
@@ -12,18 +9,16 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 class EcoFriendly(BasePage):
     page_url = '/collections/eco-friendly.html'
-
+    find_item = None
 
     def select_sort(self, value):
         selected = self.find(loc.sort)
         actions = ActionChains(self.driver)
         actions.move_to_element(selected).click().perform()
-        time.sleep(1)
+        WebDriverWait(self.driver, 5).until(text_is_not_empty_in_element(loc.welcome))
         dropdown = Select(selected)
         dropdown.select_by_value(value)
-        time.sleep(1)
-        # WebDriverWait(self.driver, 5).until(ec.url_contains(f'product_list_order={value}'))
-        # self.wait_element_presence(5, loc.product)
+        WebDriverWait(self.driver, 5).until(text_is_not_empty_in_element(loc.welcome))
         items = self.find_all(loc.product)
         list_exp = []
         match value:
@@ -37,16 +32,27 @@ class EcoFriendly(BasePage):
                 self.assert_check(list_exp, sorted(list_exp), f'Error sorted {value}')
         print(list_exp)
 
-    # def choose_size(self):
-    #     WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.ID, "layered-filter-block")))
-    #     size_title = self.driver.find_elements(By.CLASS_NAME, "filter-options-title")[2]
-    #     actions = ActionChains(self.driver)
-    #     actions.move_to_element(size_title).click().perform()
-    #     # WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.CSS_SELECTOR, "div[data-role='title'][aria-selected='true']")))
-    #
-    #
-    #     # Найти и кликнуть на элемент "XS"
-    #     xs_size = self.driver.find_elements(By.CSS_SELECTOR, "div.swatch-option.text[option-label='XS']")[0]
-    #     xs_size.click()
+# currently unused
+    def choose_color(self, color):
+        WebDriverWait(self.driver, 5).until(text_is_not_empty_in_element(loc.welcome))
+        self.find_item = self.driver.find_elements(*loc.product_details)[0]
+        color_chose = self.find_item.find_element(By.CSS_SELECTOR, f'[option-label="{color}"]')
+        actions = ActionChains(self.driver)
+        actions.move_to_element(self.find_item)
+        actions.move_to_element(color_chose)
+        actions.click()
+        actions.perform()
 
-
+    def add_to_cart(self):
+        WebDriverWait(self.driver, 5).until(text_is_not_empty_in_element(loc.welcome))
+        actions = ActionChains(self.driver)
+        if self.find_item:
+            add_to_cart = self.find_item.find_element(*loc.add_to_cart)
+            actions.move_to_element(self.find_item)
+        else:
+            find_item = self.driver.find_elements(*loc.product_details)[0]
+            add_to_cart = find_item.find_element(*loc.add_to_cart)
+            actions.move_to_element(find_item)
+        actions.move_to_element(add_to_cart)
+        actions.click()
+        actions.perform()
