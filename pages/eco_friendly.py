@@ -23,10 +23,12 @@ class EcoFriendly(BasePage):
             case 'price':
                 for price in items:
                     list_exp.append(float(price.find_element(*loc.price).text.replace('$', '')))
+                    self.screenshot()
                 self.assert_check(list_exp, sorted(list_exp), f'Error sorted {value}')
             case 'name':
                 for name in items:
                     list_exp.append(name.find_element(*loc.product_name).text)
+                    self.screenshot()
                 self.assert_check(list_exp, sorted(list_exp), f'Error sorted {value}')
         print(list_exp)
 
@@ -38,6 +40,7 @@ class EcoFriendly(BasePage):
         actions = ActionChains(self.driver)
         actions.move_to_element(self.find_item)
         actions.move_to_element(color_chose)
+        self.screenshot()
         actions.click()
         actions.perform()
 
@@ -54,3 +57,4 @@ class EcoFriendly(BasePage):
         actions.move_to_element(add_to_cart)
         actions.click()
         actions.perform()
+        self.screenshot()

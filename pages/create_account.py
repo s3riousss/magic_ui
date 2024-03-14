@@ -22,6 +22,7 @@ class CreateAccount(BasePage):
         email_field.send_keys(data.get('email'))
         password_field.send_keys(data.get('password'))
         confirm_password_field.send_keys(data.get('password'))
+        self.screenshot()
         btn_create_field.click()
         return fake_data_for_account
 
@@ -32,6 +33,7 @@ class CreateAccount(BasePage):
         self.driver.execute_script('arguments[0].scrollIntoView(true)', btn_create_field)
         actions = ActionChains(self.driver)
         actions.move_to_element(btn_create_field)
+        self.screenshot()
         actions.click()
         actions.perform()
         # btn_create_field.click()

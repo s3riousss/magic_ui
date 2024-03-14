@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as ec
 from utils.project_ec import text_is_not_empty_in_element
 from pages.locators import create_account_locators as loc
 from pages.locators import eco_friendly_locators as loc_eco
+from allure_commons.types import AttachmentType
 
 
 class BasePage:
@@ -44,6 +45,7 @@ class BasePage:
         if self.page_url:
             self.driver.get(f'{self.base_url}{self.page_url}')
             self.wait_full_to_load()
+            self.screenshot()
         else:
             raise NotImplementedError('Page can not be opened for this page class')
 
@@ -105,3 +107,7 @@ class BasePage:
 
     def check_more_icon(self, exp_more_icon):
         self.assert_check(self.more_icon, exp_more_icon, 'Error check more icon\n')
+
+    @allure.step('Screenshot')
+    def screenshot(self, file_name='screenshot.png'):
+        allure.attach(self.driver.get_screenshot_as_png(), name=file_name, attachment_type=AttachmentType.PNG)
