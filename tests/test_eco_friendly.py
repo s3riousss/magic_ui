@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 
 @allure.feature('Test ui')
@@ -14,6 +15,7 @@ def test_sorted_by_price(eco_friendly):
 @allure.story('Test sort by name')
 @allure.title('Test sort by name')
 @allure.severity(allure.severity_level.CRITICAL)
+@pytest.mark.extended
 def test_sorted_by_name(eco_friendly):
     eco_friendly.open_page()
     eco_friendly.select_sort('name')

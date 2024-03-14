@@ -1,6 +1,4 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from utils.project_ec import text_is_not_empty_in_element
 from pages.base_page import BasePage
 from pages.locators import eco_friendly_locators as loc
 from selenium.webdriver.support.select import Select
@@ -15,10 +13,10 @@ class EcoFriendly(BasePage):
         selected = self.find(loc.sort)
         actions = ActionChains(self.driver)
         actions.move_to_element(selected).click().perform()
-        WebDriverWait(self.driver, 5).until(text_is_not_empty_in_element(loc.welcome))
+        self.wait_full_to_load()
         dropdown = Select(selected)
         dropdown.select_by_value(value)
-        WebDriverWait(self.driver, 5).until(text_is_not_empty_in_element(loc.welcome))
+        self.wait_full_to_load()
         items = self.find_all(loc.product)
         list_exp = []
         match value:
@@ -34,7 +32,7 @@ class EcoFriendly(BasePage):
 
 # currently unused
     def choose_color(self, color):
-        WebDriverWait(self.driver, 5).until(text_is_not_empty_in_element(loc.welcome))
+        self.wait_full_to_load()
         self.find_item = self.driver.find_elements(*loc.product_details)[0]
         color_chose = self.find_item.find_element(By.CSS_SELECTOR, f'[option-label="{color}"]')
         actions = ActionChains(self.driver)
@@ -44,7 +42,7 @@ class EcoFriendly(BasePage):
         actions.perform()
 
     def add_to_cart(self):
-        WebDriverWait(self.driver, 5).until(text_is_not_empty_in_element(loc.welcome))
+        self.wait_full_to_load()
         actions = ActionChains(self.driver)
         if self.find_item:
             add_to_cart = self.find_item.find_element(*loc.add_to_cart)

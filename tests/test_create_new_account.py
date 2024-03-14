@@ -31,6 +31,7 @@ def test_create_account_with_old_account(create_account, create_new_account, sta
 @allure.story('Test create account with empty all fields')
 @allure.title('Test create account with empty all fields')
 @allure.severity(allure.severity_level.NORMAL)
+@pytest.mark.smoke
 def test_create_account_with_empty_all_fields(create_account, start_end):
     required_field = 'This is a required field.'
     create_account.open_page()
