@@ -1,0 +1,21 @@
+Start checking: check_error_message
+Actual result= This is a required field.
+
+Expected result= This is a required field.
+
+Done checking: check_error_message
+
+Start checking: check_error_message
+Actual result= This is a required field.
+
+Expected result= This is a required field.
+
+Done checking: check_error_message
+
+Start checking: check_error_message
+Actual result= This is a required field.
+
+Expected result= This is a required field.
+
+Done checking: check_error_message
+

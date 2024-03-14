@@ -1,0 +1,8 @@
+Start checking: select_sort
+Actual result= ['Ana Running Short', 'Argus All-Weather Tank', 'Ariel Roll Sleeve Sweatshirt', 'Atlas Fitness Tank', 'Bella Tank', 'Bruno Compete Hoodie', 'Chaz Kangeroo Hoodie', 'Daria Bikram Pant', 'Electra Bra Top', 'Elisa EverCool™ Tee', 'Fiona Fitness Short', 'Frankie Sweatshirt']
+
+Expected result= ['Ana Running Short', 'Argus All-Weather Tank', 'Ariel Roll Sleeve Sweatshirt', 'Atlas Fitness Tank', 'Bella Tank', 'Bruno Compete Hoodie', 'Chaz Kangeroo Hoodie', 'Daria Bikram Pant', 'Electra Bra Top', 'Elisa EverCool™ Tee', 'Fiona Fitness Short', 'Frankie Sweatshirt']
+
+Done checking: select_sort
+
+['Ana Running Short', 'Argus All-Weather Tank', 'Ariel Roll Sleeve Sweatshirt', 'Atlas Fitness Tank', 'Bella Tank', 'Bruno Compete Hoodie', 'Chaz Kangeroo Hoodie', 'Daria Bikram Pant', 'Electra Bra Top', 'Elisa EverCool™ Tee', 'Fiona Fitness Short', 'Frankie Sweatshirt']
