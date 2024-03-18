@@ -1,4 +1,3 @@
-from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from pages.locators import eco_friendly_locators as loc
 from selenium.webdriver.support.select import Select
@@ -23,26 +22,12 @@ class EcoFriendly(BasePage):
             case 'price':
                 for price in items:
                     list_exp.append(float(price.find_element(*loc.price).text.replace('$', '')))
-                    self.screenshot()
                 self.assert_check(list_exp, sorted(list_exp), f'Error sorted {value}')
             case 'name':
                 for name in items:
                     list_exp.append(name.find_element(*loc.product_name).text)
-                    self.screenshot()
                 self.assert_check(list_exp, sorted(list_exp), f'Error sorted {value}')
         print(list_exp)
-
-# currently unused
-    def choose_color(self, color):
-        self.wait_full_to_load()
-        self.find_item = self.driver.find_elements(*loc.product_details)[0]
-        color_chose = self.find_item.find_element(By.CSS_SELECTOR, f'[option-label="{color}"]')
-        actions = ActionChains(self.driver)
-        actions.move_to_element(self.find_item)
-        actions.move_to_element(color_chose)
-        self.screenshot()
-        actions.click()
-        actions.perform()
 
     def add_to_cart(self):
         self.wait_full_to_load()
@@ -51,7 +36,7 @@ class EcoFriendly(BasePage):
             add_to_cart = self.find_item.find_element(*loc.add_to_cart)
             actions.move_to_element(self.find_item)
         else:
-            find_item = self.driver.find_elements(*loc.product_details)[0]
+            find_item = self.find_all(loc.product_details)[0]
             add_to_cart = find_item.find_element(*loc.add_to_cart)
             actions.move_to_element(find_item)
         actions.move_to_element(add_to_cart)
