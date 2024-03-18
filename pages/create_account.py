@@ -33,7 +33,40 @@ class CreateAccount(BasePage):
         self.driver.execute_script('arguments[0].scrollIntoView(true)', btn_create_field)
         actions = ActionChains(self.driver)
         actions.move_to_element(btn_create_field)
-        self.screenshot()
         actions.click()
         actions.perform()
         # btn_create_field.click()
+
+    @allure.step('Checking error message for field')
+    def check_error_message(self, field, exp_error):
+        match field:
+            case 'first_name':
+                first_name_error = self.find(loc.first_name_error)
+                self.assert_check(
+                    first_name_error.text, exp_error, f'Error check {field}'
+                )
+            case 'last_name':
+                last_name_error = self.find(loc.last_name_error)
+                assert last_name_error.text == exp_error, self.assert_check(
+                    last_name_error.text, exp_error, f'Error check {field}'
+                )
+            case 'email':
+                email_field_error = self.find(loc.email_error)
+                self.assert_check(
+                    email_field_error.text, exp_error, f'Error check {field}'
+                )
+            case 'email':
+                email_field_error = self.find(loc.email_error)
+                self.assert_check(
+                    email_field_error.text, exp_error, f'Error check {field}'
+                )
+            case 'password_':
+                password_field_error = self.find(loc.password_error)
+                self.assert_check(
+                    password_field_error.text, exp_error, f'Error check {field}'
+                )
+            case 'confirm_password':
+                confirm_password_field = self.find(loc.confirm_password_error)
+                self.assert_check(
+                    confirm_password_field.text, exp_error, f'Error check {field}'
+                )

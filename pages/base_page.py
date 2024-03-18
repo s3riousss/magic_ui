@@ -55,47 +55,6 @@ class BasePage:
     def find_all(self, locator: tuple):
         return self.driver.find_elements(*locator)
 
-    @allure.step('Checking successful message after create new account')
-    def check_alert_text(self, text):
-        self.wait_full_to_load()
-        self.wait_element_text(10, loc.alert)
-        alert = self.find(loc.alert)
-        assert alert.text == text, self.assert_check(alert.text, text, 'Error check alert text')
-
-    @allure.step('Checking error message for field')
-    def check_error_message(self, field, exp_error):
-        match field:
-            case 'first_name':
-                first_name_error = self.find(loc.first_name_error)
-                self.assert_check(
-                    first_name_error.text, exp_error, f'Error check {field}'
-                )
-            case 'last_name':
-                last_name_error = self.find(loc.last_name_error)
-                assert last_name_error.text == exp_error, self.assert_check(
-                    last_name_error.text, exp_error, f'Error check {field}'
-                )
-            case 'email':
-                email_field_error = self.find(loc.email_error)
-                self.assert_check(
-                    email_field_error.text, exp_error, f'Error check {field}'
-                )
-            case 'email':
-                email_field_error = self.find(loc.email_error)
-                self.assert_check(
-                    email_field_error.text, exp_error, f'Error check {field}'
-                )
-            case 'password_':
-                password_field_error = self.find(loc.password_error)
-                self.assert_check(
-                    password_field_error.text, exp_error, f'Error check {field}'
-                )
-            case 'confirm_password':
-                confirm_password_field = self.find(loc.confirm_password_error)
-                self.assert_check(
-                    confirm_password_field.text, exp_error, f'Error check {field}'
-                )
-
     def wait_full_to_load(self):
         return WebDriverWait(self.driver, 5).until(text_is_not_empty_in_element(loc_eco.welcome))
 
@@ -111,3 +70,10 @@ class BasePage:
     @allure.step('Screenshot')
     def screenshot(self, file_name='screenshot.png'):
         allure.attach(self.driver.get_screenshot_as_png(), name=file_name, attachment_type=AttachmentType.PNG)
+
+    @allure.step('Checking successful message after create new account')
+    def check_alert_text(self, text):
+        self.wait_full_to_load()
+        self.wait_element_text(10, loc.alert)
+        alert = self.find(loc.alert)
+        assert alert.text == text, self.assert_check(alert.text, text, 'Error check alert text')
