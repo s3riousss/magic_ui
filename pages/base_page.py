@@ -97,7 +97,7 @@ class BasePage:
                 )
 
     def wait_full_to_load(self):
-        return WebDriverWait(self.driver, 5).until(text_is_not_empty_in_element(loc_eco.welcome))
+        return WebDriverWait(self.driver, 10).until(text_is_not_empty_in_element(loc_eco.welcome))
 
     def check_title(self, exp_title):
         self.assert_check(self.title, exp_title, 'Error check title\n')

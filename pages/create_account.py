@@ -10,7 +10,7 @@ class CreateAccount(BasePage):
 
     @allure.step('Fill all element on form create new account')
     def fill_all_form(self, data=fake_data_for_account):
-        self.wait_element_presence(5, loc.first_name)
+        self.wait_element_presence(10, loc.first_name)
         first_name = self.find(loc.first_name)
         last_name = self.find(loc.last_name)
         email_field = self.find(loc.email)
@@ -29,7 +29,7 @@ class CreateAccount(BasePage):
     @allure.step('Clik on button "Create an Account"')
     def click_button_create_account(self):
         btn_create_field = self.find(loc.btn_create_account)
-        self.wait_element_presence(5, loc.btn_create_account)
+        self.wait_element_presence(10, loc.btn_create_account)
         self.driver.execute_script('arguments[0].scrollIntoView(true)', btn_create_field)
         actions = ActionChains(self.driver)
         actions.move_to_element(btn_create_field)
