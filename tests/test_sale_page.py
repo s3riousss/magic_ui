@@ -2,32 +2,26 @@ import allure
 import pytest
 
 
-@allure.feature('Test ui')
 @allure.story('Test redirect to show women details')
 @allure.title('Test redirect to page "show women details"')
-@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.smoke
-def test_show_women_details(sale_page):
+def test_show_women_details(sale_page, start_end, set_allure):
     sale_page.open_page()
     sale_page.check_click_button_url_women()
 
 
-@allure.feature('Test ui')
 @allure.story('Test redirect to men bargains')
 @allure.title('Test redirect to page "men bargains"')
-@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.smoke
-def test_men_bargains(sale_page):
+def test_men_bargains(sale_page, start_end, set_allure):
     sale_page.open_page()
     sale_page.check_men_bargains()
 
 
-@allure.feature('Test ui')
 @allure.story('Test correct teext in block luma great steal')
 @allure.title('Test luma great steal"')
-@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.regression
-def test_luma_great_steal(sale_page):
+def test_luma_great_steal(sale_page, start_end, set_allure):
     sale_page.open_page()
     sale_page.luma_gear_steals()
     sale_page.check_title(exp_title='Luma Gear Steals')
