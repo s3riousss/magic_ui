@@ -2,6 +2,7 @@ import pytest
 import allure
 
 
+@pytest.mark.smoke
 @allure.story('Test create account')
 @allure.title('Test create new account with all correct fields')
 def test_create_new_account_with_all_correct_fields(create_account, start_end, set_allure):

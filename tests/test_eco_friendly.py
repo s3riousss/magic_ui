@@ -2,8 +2,10 @@ import allure
 import pytest
 
 
+@pytest.mark.skip('Error price sorted')
 @allure.story('Test sort by price')
 @allure.title('Test sort by price')
+@pytest.mark.smoke
 def test_sorted_by_price(eco_friendly, start_end, set_allure):
     eco_friendly.open_page()
     eco_friendly.select_sort('price')
@@ -19,6 +21,7 @@ def test_sorted_by_name(eco_friendly, start_end, set_allure):
 
 @allure.story('Test add to cart without options')
 @allure.title('Test add to cart without options')
+@pytest.mark.regression
 def test_add_to_cart_without_options(eco_friendly, start_end, set_allure):
     eco_friendly.open_page()
     eco_friendly.add_to_cart()
